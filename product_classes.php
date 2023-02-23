@@ -115,47 +115,38 @@
         $width = $_POST["Width"];
         $length = $_POST["Length"];
     
-    
+        //checks for entered user inputs,and according to product type, creates a new object instance to enter into database
         if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
             if($_POST["ProductType"] == "DVD" && isset($_POST["Size"])){
                 $product = new DVD;
                 $product->setDVD($sku, $name, $price, $size);
                 $newProduct = serialize($product);
-                print_r($newProduct);
-
+                //print_r($newProduct);
                 $sql = "INSERT INTO products (Product) VALUES('$newProduct')";
-                //$sql = "INSERT INTO productinfo (SKU, Name, Price, ProductType, Size) VALUES('$sku', '$name', '$price', '$p_type', '$size')";
                 $result = $conn->query($sql);
                 //echo $product->getSKU();
-                //echo "PHP got values: " . $_POST['SKU'] . ", " . $_POST['Name']. ", " . $_POST['Price']. ", " . $_POST['ProductType']. ", " . $_POST['Size']; 
             }
             if($_POST["ProductType"] == "Book" && isset($_POST["Weight"])){
                 $product = new Book;
                 $product->setBook($sku, $name, $price, $weight);
-
                 $newProduct = serialize($product);
-                print_r($newProduct);
-
+                //print_r($newProduct);
                 $sql = "INSERT INTO products (Product) VALUES('$newProduct')";
-                //$sql = "INSERT INTO productinfo (SKU, Name, Price, ProductType, Weight) VALUES('$sku', '$name', '$price', '$p_type', '$weight')";
                 $result = $conn->query($sql);
-                //echo "PHP got values: " . $_POST['SKU'] . ", " . $_POST['Name']. ", " . $_POST['Price']. ", " . $_POST['ProductType']. ", " . $_POST['Weight']; 
             }
             if($_POST["ProductType"] == "Furniture" && isset($_POST["Height"]) && isset($_POST["Width"]) && isset($_POST["Length"])){
                 $product = new Furniture;
                 $product->setFurniture($sku, $name, $price, $height, $width, $length);
                 $newProduct = serialize($product);
-                print_r($newProduct);
-
+                //print_r($newProduct);
                 $sql = "INSERT INTO products (Product) VALUES('$newProduct')";
-
-                //$sql = "INSERT INTO productinfo (SKU, Name, Price, ProductType, Height, Width, Length) VALUES('$sku', '$name', '$price', '$p_type', '$height', '$width', '$length')";
                 $result = $conn->query($sql);
-                //echo "PHP got values: " . $_POST['SKU'] . ", " . $_POST['Name']. ", " . $_POST['Price']. ", " . $_POST['ProductType']. ", " . $_POST['Height']. "X" . $_POST['Width']. "X" . $_POST['Length']; 
             }
         }
         
         do{
+            //checks only for the first 3 inputs to be set, that are common for Product class... container
+            //should be checked for every input field thogh
             if(empty($sku) || empty($name) || empty($price)){
                 $errorMsg = "Please, submit required data!";
                 break;
