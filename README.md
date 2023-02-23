@@ -1,2 +1,2 @@
-# myshop_LA
-Junior Developer Project
+# myshop_LAND 
+Junior Developer Test Project
