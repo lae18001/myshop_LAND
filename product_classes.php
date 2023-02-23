@@ -122,16 +122,15 @@
                 $product->setDVD($sku, $name, $price, $size);
                 $newProduct = serialize($product);
                 //print_r($newProduct);
-                $sql = "INSERT INTO products (Product) VALUES('$newProduct')";
+                $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
                 $result = $conn->query($sql);
-                //echo $product->getSKU();
             }
             if($_POST["ProductType"] == "Book" && isset($_POST["Weight"])){
                 $product = new Book;
                 $product->setBook($sku, $name, $price, $weight);
                 $newProduct = serialize($product);
                 //print_r($newProduct);
-                $sql = "INSERT INTO products (Product) VALUES('$newProduct')";
+                $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
                 $result = $conn->query($sql);
             }
             if($_POST["ProductType"] == "Furniture" && isset($_POST["Height"]) && isset($_POST["Width"]) && isset($_POST["Length"])){
@@ -139,7 +138,7 @@
                 $product->setFurniture($sku, $name, $price, $height, $width, $length);
                 $newProduct = serialize($product);
                 //print_r($newProduct);
-                $sql = "INSERT INTO products (Product) VALUES('$newProduct')";
+                $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
                 $result = $conn->query($sql);
             }
         }

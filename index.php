@@ -19,8 +19,9 @@
                 </div>
                 <div class="col-6">
                     <ul>
-                        <li> <a class="btn btn-success" role="button" href="add_product.php">ADD</a></li>
-                        <!--<li> <a class="btn btn-danger" role="button" id="delete-product-btn" href="#" onclick="removeProduct();">MASS DELETE</a></li>-->
+                    <!--<li> <a class="btn btn-success" role="button" href="add_product.php">ADD</a></li>
+                        <li> <a class="btn btn-danger" role="button" id="delete-product-btn" href="#" onclick="removeProduct();">MASS DELETE</a></li>-->
+                        <li> <input type="button" onclick="location.href='add_product.php'; return false;" value="ADD"></li>
                         <li> <input type="button" id="delete-product-btn" onclick="removeProduct();" value="MASS DELETE"></li>
                     </ul>
                 </div>
@@ -123,6 +124,15 @@
                             }
                         }};
                 </script>
+                <?php
+
+                    $sql = "DELETE FROM 'products' WHERE SKU = $product->sku"; 
+                    //DELETE FROM `products` WHERE SKU = "ABC123"; 
+                    $result = $conn->query($sql);
+
+                    //echo "Product deleted with SKU: $product->sku";
+                
+                ?>
             </div>
         </div>
 
