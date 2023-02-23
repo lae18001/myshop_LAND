@@ -37,7 +37,7 @@
 
                    /* $servername = "localhost";
                     $username = "id20340347_root";
-                    $password = "Milestiba_23";
+                    $password = "TestDevPro_2023";
                     $datab = "id20340347_dev_test";*/
                     
                     // Create connection to DB
@@ -55,58 +55,62 @@
                     if(!$result){
                         die("Invalid Query: " .$conn->connect_error);
                     }
-                    $row = array();
-                    //read data for each row, display it with associated column name
-                    //should print out the product object, depending on the product type 
-                   // while($row = $result->fetch_assoc()){
+                    
+                    //reads data object by object, and displays it with associated key names
                     while($row = mysqli_fetch_assoc($result)){
                         
                         $product = unserialize( $row['Product']);
-                        var_dump($product);
-                      
-
-                        echo"
-                        <div class='col-12 col-lg-3'>
-                            <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
-                                <div class='card-body'>
-                                    <input type='checkbox' class='delete-checkbox'>
-                                    <div class='text-center'>
-                                        <h5 class='card-title'>$product->sku</h5>
-                                        <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
-                                        <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
-                                        <h6 class='card-subtitle mb-2 text-muted'$product->size MB</h6>
+                        //print_r($product);
+                        if($product instanceof DVD){
+                            echo"
+                            <div class='col-12 col-lg-3'>
+                                <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
+                                    <div class='card-body'>
+                                        <input type='checkbox' class='delete-checkbox'>
+                                        <div class='text-center'>
+                                            <h5 class='card-title'>$product->sku</h5>
+                                            <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
+                                            <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
+                                            <h6 class='card-subtitle mb-2 text-muted'>Size: $product->size MB</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>";
-                    }
-
-                    //sql request from DB
-                   /* $sql = "SELECT * FROM products";
-                    $result = $conn->query($sql);
-
-                    if(!$result){
-                        die("Invalid Query: " .$conn->connect_error);
-                    }
-                    //read data for each row, display it with associated column name
-                    //should print out the product object, depending on the product type 
-                    while($row = $result->fetch_assoc()){
-                        echo"
-                        <div class='col-12 col-lg-3'>
-                            <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
-                                <div class='card-body'>
-                                    <input type='checkbox' class='delete-checkbox'>
-                                    <div class='text-center'>
-                                        <h5 class='card-title'>$row[SKU]</h5>
-                                        <h6 class='card-subtitle mb-2 text-muted'>$row[Name]</h6>
-                                        <h6 class='card-subtitle mb-2 text-muted'>$row[Price] $</h6>
-                                        <h6 class='card-subtitle mb-2 text-muted'>$row[ProductType]</h6>
-                                        
+                            </div>";
+                        }
+                        if($product instanceof Book){
+                            echo"
+                            <div class='col-12 col-lg-3'>
+                                <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
+                                    <div class='card-body'>
+                                        <input type='checkbox' class='delete-checkbox'>
+                                        <div class='text-center'>
+                                            <h5 class='card-title'>$product->sku</h5>
+                                            <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
+                                            <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
+                                            <h6 class='card-subtitle mb-2 text-muted'>Weight: $product->weight KG</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>";
-                    }*/
+                            </div>";
+                        }
+                        if($product instanceof Furniture){
+                            echo"
+                            <div class='col-12 col-lg-3'>
+                                <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
+                                    <div class='card-body'>
+                                        <input type='checkbox' class='delete-checkbox'>
+                                        <div class='text-center'>
+                                            <h5 class='card-title'>$product->sku</h5>
+                                            <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
+                                            <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
+                                            <h6 class='card-subtitle mb-2 text-muted'>Dimension: $product->height X $product->width X $product->length</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>";
+                        }
+                    }
+
                 ?>
                 <script>
                     function removeProduct(){

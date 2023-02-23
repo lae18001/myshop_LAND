@@ -4,6 +4,11 @@
     $username = "root";
     $password = "";
     $datab = "dev_test";
+
+    /*$servername = "localhost";
+    $username = "id20340347_root";
+    $password = "TestDevPro_2023";
+    $datab = "id20340347_dev_test";*/
     
     // Create connection to DB
     $conn = new mysqli($servername, $username, $password, $datab);
@@ -13,7 +18,7 @@
         echo "Connection Failed!";
     }
     
-    abstract class Product{
+    class Product{
         public $sku;
         public $name;
         public $price;
@@ -42,7 +47,7 @@
                 $this->size = $size;
         }
 
-        public function getProductInfo(){
+        public function getSize(){
             echo $this->size;
         }
     }
