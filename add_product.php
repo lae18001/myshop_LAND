@@ -1,163 +1,5 @@
 <?php
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $datab = "dev_test";
-    
-    // Create connection to DB
-    $conn = new mysqli($servername, $username, $password, $datab);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-        echo "Connection Failed!";
-    }
-    abstract class Product{
-        private $sku;
-        private $name;
-        private $price;
-
-        public function setProduct($sku, $name, $price){
-            $this->sku = $sku;
-            $this->name = $name;
-            $this->price = $price;
-        }
-        public function getSKU(){
-            echo $this->sku;
-        } 
-        public function getName(){
-            echo $this->name;
-        } 
-        public function getPrice(){
-            echo $this->price;
-        }
-    }
-
-    class DVD extends Product{ 
-        private $size;
-
-        public function setDVD($sku, $name, $price, $size){
-                parent::setProduct($sku, $name, $price);
-                $this->size = $size;
-        }
-
-        public function getProductInfo(){
-            echo $this->size;
-        }
-    }
-
-    class Book extends Product{ 
-        private $weight;
-
-        public function setBook($sku, $name, $price, $weight){
-                parent::setProduct($sku, $name, $price);
-                $this->weight = $weight; 
-        }
-        public function getWeight(){
-            echo $this->weight;
-        } 
-    }
-
-    class Furniture extends Product{ 
-        private $width;
-        private $height;
-        private $length;
-
-        public function setFurniture($sku, $name, $price, $height, $width, $length){
-                parent::setProduct($sku, $name, $price);
-                $this->height = $height; 
-                $this->width = $width; 
-                $this->length = $length; 
-        }
-
-        public function getHeight(){
-            echo $this->height;
-        }
-        public function getWidth(){
-            echo $this->width;
-        }
-        public function getLength(){
-            echo $this->length;
-        }
-        public function getDimensions(){
-            echo $this->height. "X" . $this->width. "X". $this->length;
-        }
-    
-    }
-
-    $sku = "";
-    $name = "";
-    $price = "";
-    $p_type = "";
-    $size = "";
-    $weight = "";
-    $height = "";
-    $width = "";
-    $length = "";
-
-    $errorMsg = "";
-
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-        $sku = $_POST["SKU"];
-        $name = $_POST["Name"];
-        $price = $_POST["Price"];
-        $p_type = $_POST["ProductType"];
-        $size = $_POST["Size"];
-        $weight = $_POST["Weight"];
-        $height = $_POST["Height"];
-        $width = $_POST["Width"];
-        $length = $_POST["Length"];
-    
-    
-        if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
-            if($_POST["ProductType"] == "DVD" && isset($_POST["Size"])){
-                $product = new DVD;
-                $product->setDVD($sku, $name, $price, $size);
-                //$myJson = json_encode($product);
-
-                //$sql = "INSERT INTO products (Object) VALUES('$myJson')";
-                $sql = "INSERT INTO productinfo (SKU, Name, Price, ProductType, Size) VALUES('$sku', '$name', '$price', '$p_type', '$size')";
-                $result = $conn->query($sql);
-                //echo $product->getSKU();
-                echo "PHP got values: " . $_POST['SKU'] . ", " . $_POST['Name']. ", " . $_POST['Price']. ", " . $_POST['ProductType']. ", " . $_POST['Size']; 
-            }
-            if($_POST["ProductType"] == "Book" && isset($_POST["Weight"])){
-                $product = new Book;
-                $product->setBook($sku, $name, $price, $weight);
-
-                $sql = "INSERT INTO productinfo (SKU, Name, Price, ProductType, Weight) VALUES('$sku', '$name', '$price', '$p_type', '$weight')";
-                $result = $conn->query($sql);
-                echo "PHP got values: " . $_POST['SKU'] . ", " . $_POST['Name']. ", " . $_POST['Price']. ", " . $_POST['ProductType']. ", " . $_POST['Weight']; 
-            }
-            if($_POST["ProductType"] == "Furniture" && isset($_POST["Height"]) && isset($_POST["Width"]) && isset($_POST["Length"])){
-                $product = new Furniture;
-                $product->setFurniture($sku, $name, $price, $height, $width, $length);
-
-                $sql = "INSERT INTO productinfo (SKU, Name, Price, ProductType, Height, Width, Length) VALUES('$sku', '$name', '$price', '$p_type', '$height', '$width', '$length')";
-                $result = $conn->query($sql);
-                echo "PHP got values: " . $_POST['SKU'] . ", " . $_POST['Name']. ", " . $_POST['Price']. ", " . $_POST['ProductType']. ", " . $_POST['Height']. "X" . $_POST['Width']. "X" . $_POST['Length']; 
-            }
-        }
-        
-        do{
-            if(empty($sku) || empty($name) || empty($price)){
-                $errorMsg = "Please, submit required data!";
-                break;
-            }
-
-            $sku = "";
-            $name = "";
-            $price = "";
-            $p_type = "";
-            $size = "";
-            $weight = "";
-            $height = "";
-            $width = "";
-            $length = "";
-
-        }while(false);
-    }
+    include "product_classes.php"
 ?>
 
 <!DOCTYPE html>
@@ -182,7 +24,7 @@
                     <ul>
                        <!--  <li> <a class="btn btn-success" role="button" type="submit" form="product_form" name="Save-btn" value="SAVE">SAVE</a></li>
                          <li> <a class="btn btn-danger" role="button" id="" href="index.php">CANCEL</a></li>-->
-                        <li> <input type="submit" form="product_form" id="save-btn" name="Save-btn" value="SAVE"></li>
+                        <li> <input type="submit" form="product_form" id="save" name="Save" value="Save"></li>
                         <li> <a class="btn btn-danger" role="button" onclick="location.href='index.php'; return false;">CANCEL</a></li>
                         <!--<li> <input type="button" onclick="location.href='index.php'; return false;" value="CANCEL"></li>-->
                     </ul>
@@ -203,30 +45,23 @@
             ?>
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <!--<form method="POST" id="product_form" action="send.php">-->
                     <form method="POST" id="product_form">   
                         <div class="row mb-3">
                             <label class="col-sm-6 col-form-label" for="sku">SKU</label>
                             <div class="col-sm-6">
                                <input type="text" id="sku" name="SKU" value="<?= htmlentities($sku) ?>">
-                               <!--  <input type="text" id="sku" name="SKU">
-                                <span class="validity"></span>-->
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-6 col-form-label" for="name">Name</label>
                             <div class="col-sm-6">
                                 <input type="text" id="name" name="Name" value="<?= htmlentities($name) ?>">
-                                <!--   <input type="text" id="name" name="Name">
-                                <span class="validity"></span>-->
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-6 col-form-label" for="price">Price($)</label>
                             <div class="col-sm-6">
                              <input type="text" id="price" name="Price" value="<?= htmlentities($price) ?>">
-                                <!--   <input type="text" id="price" name="Price">
-                                <span class="validity"></span>-->
                             </div>
                         </div>
                         
@@ -246,8 +81,6 @@
                             <label class="col-sm-6 col-form-label" for="size">Size(MB)</label>
                             <div class="col-6">
                                <input type="text" id="size" name="Size" value="<?= htmlentities($size) ?>">
-                               <!--  <input type="text" id="size" name="Size">
-                                <span class="validity"></span>-->
                             </div>
                             <span class="form-text text-muted">Please, provide size</span>
                         </div>
@@ -287,7 +120,6 @@
         </div>
         <script>
              function typeDisplay(id_type) {
-                //console.log(id_type);
                 let x = document.getElementById(id_type);
                 if (x.style.display === "flex") {
                     x.style.display = "none";
@@ -295,7 +127,6 @@
                     x.style.display = "flex";
                 }
             }
-
             const selectElement = document.querySelector('.productType');
             selectElement.addEventListener('change', (event) => {
                 typeDisplay(`${event.target.value}_disp`);

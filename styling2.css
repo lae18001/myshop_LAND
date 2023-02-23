@@ -15,10 +15,6 @@ ul li{
     margin-left: 1em;
 }
 
-ul li input #save-btn{
-    color: green;
-}
-
 h6{
     color: grey;
 }
@@ -32,8 +28,6 @@ hr {
     border-style: inset;
     border-width: 1px;
 } 
-
-
 
 #DVD_disp{
     display: none;
