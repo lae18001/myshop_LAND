@@ -22,11 +22,8 @@
                 </div>
                 <div class="col-6">
                     <ul>
-                       <!--  <li> <a class="btn btn-success" role="button" type="submit" form="product_form" name="Save-btn" value="SAVE">SAVE</a></li>
-                         <li> <a class="btn btn-danger" role="button" id="" href="index.php">CANCEL</a></li>-->
-                        <li> <input type="submit" form="product_form" id="save" name="Save" value="Save"></li>
-                        <li> <a class="btn btn-danger" role="button" onclick="location.href='index.php'; return false;">CANCEL</a></li>
-                        <!--<li> <input type="button" onclick="location.href='index.php'; return false;" value="CANCEL"></li>-->
+                        <li> <input type="submit" form="product_form" id="save" name="Save" value="SAVE"></li>
+                        <li> <input type="button" onclick="location.href='index.php'; return false;" value="CANCEL"></li>
                     </ul>
                 </div>
                 <hr>
