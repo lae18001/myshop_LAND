@@ -114,41 +114,59 @@
         $height = $_POST["Height"];
         $width = $_POST["Width"];
         $length = $_POST["Length"];
-    
-        //checks for entered user inputs,and according to product type, creates a new object instance to enter into database
-        if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
-            if($_POST["ProductType"] == "DVD" && isset($_POST["Size"])){
-                $product = new DVD;
-                $product->setDVD($sku, $name, $price, $size);
-                $newProduct = serialize($product);
-                //print_r($newProduct);
-                $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
-                $result = $conn->query($sql);
-            }
-            if($_POST["ProductType"] == "Book" && isset($_POST["Weight"])){
-                $product = new Book;
-                $product->setBook($sku, $name, $price, $weight);
-                $newProduct = serialize($product);
-                //print_r($newProduct);
-                $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
-                $result = $conn->query($sql);
-            }
-            if($_POST["ProductType"] == "Furniture" && isset($_POST["Height"]) && isset($_POST["Width"]) && isset($_POST["Length"])){
-                $product = new Furniture;
-                $product->setFurniture($sku, $name, $price, $height, $width, $length);
-                $newProduct = serialize($product);
-                //print_r($newProduct);
-                $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
-                $result = $conn->query($sql);
-            }
-        }
-        
+
         do{
-            //checks only for the first 3 inputs to be set, that are common for Product class... container
-            //should be checked for every input field thogh
-            if(empty($sku) || empty($name) || empty($price)){
+            //checks if any given input field is empty, if it is, display the error message.
+            //should be checking for the ProductType specific attribute fields as well...TO DO!
+            if(empty($sku) || empty($name) || empty($price) || empty($p_type)){
                 $errorMsg = "Please, submit required data!";
                 break;
+            }
+
+            //checks for entered user inputs,and according to product type, creates a new object instance to add to database
+            if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
+                if($_POST["ProductType"] == "DVD" && isset($_POST["Size"])){
+                    $product = new DVD;
+                    $product->setDVD($sku, $name, $price, $size);
+                    $newProduct = serialize($product);
+                    //print_r($newProduct);
+                    $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
+                    $result = $conn->query($sql);
+                    if(!$result){
+                        $errorMsg = "Invalid query: " . $conn->error;
+                        break;
+                    }
+                    header("location: /myshop_LAND/index.php");
+                    exit;
+                }
+                if($_POST["ProductType"] == "Book" && isset($_POST["Weight"])){
+                    $product = new Book;
+                    $product->setBook($sku, $name, $price, $weight);
+                    $newProduct = serialize($product);
+                    //print_r($newProduct);
+                    $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
+                    $result = $conn->query($sql);
+                    if(!$result){
+                        $errorMsg = "Invalid query: " . $conn->error;
+                        break;
+                    }
+                    header("location: /myshop_LAND/index.php");
+                    exit;
+                }
+                if($_POST["ProductType"] == "Furniture" && isset($_POST["Height"]) && isset($_POST["Width"]) && isset($_POST["Length"])){
+                    $product = new Furniture;
+                    $product->setFurniture($sku, $name, $price, $height, $width, $length);
+                    $newProduct = serialize($product);
+                    //print_r($newProduct);
+                    $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
+                    $result = $conn->query($sql);
+                    if(!$result){
+                        $errorMsg = "Invalid query: " . $conn->error;
+                        break;
+                    }
+                    header("location: /myshop_LAND/index.php");
+                    exit;
+                }
             }
 
             $sku = "";
@@ -161,6 +179,6 @@
             $width = "";
             $length = "";
 
-        }while(false);
+        }while(false);  
     }
 ?>
