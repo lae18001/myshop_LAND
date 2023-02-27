@@ -122,6 +122,7 @@
                 $errorMsg = "Please, submit required data!";
                 break;
             }
+            //Implement input field value validation, invalid data must trigger notification “Please, provide the data of indicated type”
 
             //checks for entered user inputs,and according to product type, creates a new object instance to add to database
             if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
