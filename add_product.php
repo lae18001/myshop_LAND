@@ -106,12 +106,6 @@
                             <span class="form-text text-muted">Please, provide dimensions</span>
                         </div>
                     </form>
-                    <pre>
-                        $_POST:
-                        <?php
-                            print_r($_POST);
-                        ?>
-                    </pre>
                 </div>
             </div>
         </div>

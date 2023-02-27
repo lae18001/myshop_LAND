@@ -136,7 +136,7 @@
                         $errorMsg = "Invalid query: " . $conn->error;
                         break;
                     }
-                    header("location: /myshop_LAND/index.php");
+                    header("location: index.php");
                     exit;
                 }
                 if($_POST["ProductType"] == "Book" && isset($_POST["Weight"])){
@@ -150,7 +150,7 @@
                         $errorMsg = "Invalid query: " . $conn->error;
                         break;
                     }
-                    header("location: /myshop_LAND/index.php");
+                    header("location: index.php");
                     exit;
                 }
                 if($_POST["ProductType"] == "Furniture" && isset($_POST["Height"]) && isset($_POST["Width"]) && isset($_POST["Length"])){
@@ -164,7 +164,7 @@
                         $errorMsg = "Invalid query: " . $conn->error;
                         break;
                     }
-                    header("location: /myshop_LAND/index.php");
+                    header("location: index.php");
                     exit;
                 }
             }
