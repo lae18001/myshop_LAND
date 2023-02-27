@@ -125,7 +125,8 @@
 
             //checks for entered user inputs,and according to product type, creates a new object instance to add to database
             if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
-                if($_POST["ProductType"] == "DVD" && isset($_POST["Size"])){
+                if($_POST["ProductType"] == "DVD" && !empty($size)){
+
                     $product = new DVD;
                     $product->setDVD($sku, $name, $price, $size);
                     $newProduct = serialize($product);
@@ -139,7 +140,7 @@
                     header("location: index.php");
                     exit;
                 }
-                if($_POST["ProductType"] == "Book" && isset($_POST["Weight"])){
+                else if($_POST["ProductType"] == "Book" && !empty($weight)){
                     $product = new Book;
                     $product->setBook($sku, $name, $price, $weight);
                     $newProduct = serialize($product);
@@ -153,7 +154,7 @@
                     header("location: index.php");
                     exit;
                 }
-                if($_POST["ProductType"] == "Furniture" && isset($_POST["Height"]) && isset($_POST["Width"]) && isset($_POST["Length"])){
+                else if($_POST["ProductType"] == "Furniture" && !empty($height) && !empty($width) && !empty($length)){
                     $product = new Furniture;
                     $product->setFurniture($sku, $name, $price, $height, $width, $length);
                     $newProduct = serialize($product);
@@ -166,6 +167,10 @@
                     }
                     header("location: index.php");
                     exit;
+                }
+                else{
+                    $errorMsg = "Please, submit required data!";
+                    break;
                 }
             }
 
