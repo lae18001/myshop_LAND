@@ -30,7 +30,7 @@
         </div>
         <div class="container-lg my-5">
             <div class="row">
-                <?php 
+                <?php
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
@@ -52,7 +52,6 @@
                     //$sql = "SELECT * FROM productinfo";
                     $sql = "SELECT * FROM products";
                     $result = $conn->query($sql);
-
                     if(!$result){
                         die("Invalid Query: " .$conn->connect_error);
                     }
