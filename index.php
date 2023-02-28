@@ -29,12 +29,9 @@
                 </div>
                 <div class="col-6">
                     <ul>
-                    <!--<li> <a class="btn btn-success" role="button" href="add_product.php">ADD</a></li>
-                        <li> <a class="btn btn-danger" role="button" id="delete-product-btn" href="#" onclick="removeProduct();">MASS DELETE</a></li>-->
-                        <li> <input type="button" onclick="location.href='add_product.php'; return false;" value="ADD"></li>
-                        <li> <input type="submit" id="delete-product-btn" form="delete-prod" value="MASS DELETE"></li>
-                        <!--
-                            “MASS DELETE” action, implemented as checkboxes next to each product 
+                        <li> <a role="button" class="btn btn-success" href="add_product.php">ADD</a></li>
+                        <li> <button type="submit" class="btn btn-danger" id="delete-product-btn" form="delete-prod">MASS DELETE</button></li>
+                        <!-- “MASS DELETE” action, implemented as checkboxes next to each product 
                             (should have a class: .delete-checkbox) 
                             and a button “MASS DELETE” triggering delete action for the selected products.
                         -->

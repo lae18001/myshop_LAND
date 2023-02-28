@@ -22,8 +22,8 @@
                 </div>
                 <div class="col-6">
                     <ul>
-                        <li> <input type="submit" form="product_form" id="save" name="Save" value="SAVE"></li>
-                        <li> <input type="button" onclick="location.href='index.php'; return false;" value="CANCEL"></li>
+                        <li> <button type="submit" class="btn btn-success" form="product_form" id="save" name="Save">SAVE</button></li>
+                        <li> <a role="button" class="btn btn-danger" href="index.php">CANCEL</a></li>
                     </ul>
                 </div>
                 <hr>
