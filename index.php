@@ -30,7 +30,7 @@
                 <div class="col-6">
                     <ul>
                         <li> <a role="button" class="btn btn-success" href="add_product.php">ADD</a></li>
-                        <li> <button type="submit" class="btn btn-danger" id="delete-product-btn" form="delete-prod">MASS DELETE</button></li>
+                        <li> <button type="submit" class="btn btn-danger" name="delete-product-btn" id="delete-product-btn" form="delete-prod">MASS DELETE</button></li>
                         <!-- “MASS DELETE” action, implemented as checkboxes next to each product 
                             (should have a class: .delete-checkbox) 
                             and a button “MASS DELETE” triggering delete action for the selected products.
@@ -48,11 +48,11 @@
                         $product = unserialize( $row['Product']);
                         if($product instanceof DVD){
                             echo"
-                            <div class='col-12 col-lg-3'>
+                            <div class='col-12 col-lg-3'> 
                                 <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
                                     <div class='card-body'>
-                                        <form method='post' id='delete_prod'>
-                                        <input type='checkbox' class='delete-checkbox' name='chk_id[]' value='$product->sku'>
+                                        <form method='post' id='delete_prod' action='delete_product.php'>
+                                        <input type='checkbox' class='delete-checkbox' name='delete_sku[]' value='$product->sku'>
                                         </form>
                                         <div class='text-center'>
                                             <h5 class='card-title'>$product->sku</h5>
@@ -69,8 +69,8 @@
                             <div class='col-12 col-lg-3'>
                                 <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
                                     <div class='card-body'>
-                                        <form method='post' id='delete_prod'>
-                                        <input type='checkbox' class='delete-checkbox' name='chk_id[]'value='$product->sku'>
+                                        <form method='post' id='delete_prod' action='delete_product.php'>
+                                        <input type='checkbox' class='delete-checkbox' name='delete_sku[]'value='$product->sku'>
                                         </form>
                                         <div class='text-center'>
                                             <h5 class='card-title'>$product->sku</h5>
@@ -87,8 +87,8 @@
                             <div class='col-12 col-lg-3'>
                                 <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
                                     <div class='card-body'>
-                                        <form method='post' id='delete_prod'>
-                                        <input type='checkbox' class='delete-checkbox' name='chk_id[]'value='$product->sku'>
+                                        <form method='post' id='delete_prod' action='delete_product.php'>
+                                        <input type='checkbox' class='delete-checkbox' name='delete_sku[]'value='$product->sku'>
                                         </form>
                                         <div class='text-center'>
                                             <h5 class='card-title'>$product->sku</h5>
