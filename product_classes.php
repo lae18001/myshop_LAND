@@ -127,11 +127,14 @@
             //checks for entered user inputs,and according to product type, creates a new object instance to add to database
             if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
                 if($_POST["ProductType"] == "DVD" && !empty($size)){
-
+                    if(!is_numeric($size) || !is_numeric($price)){
+                        $errorMsg = "Please, provide the data of indicated type";
+                        break;
+                    }
                     $product = new DVD;
                     $product->setDVD($sku, $name, $price, $size);
                     $newProduct = serialize($product);
-                    //print_r($newProduct);
+                    
                     $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
                     $result = $conn->query($sql);
                     if(!$result){
@@ -140,12 +143,17 @@
                     }
                     header("location: index.php");
                     exit;
+                   
                 }
                 else if($_POST["ProductType"] == "Book" && !empty($weight)){
+                    if(!is_numeric($weight) || !is_numeric($price)){
+                        $errorMsg = "Please, provide the data of indicated type";
+                        break;
+                    }
                     $product = new Book;
                     $product->setBook($sku, $name, $price, $weight);
                     $newProduct = serialize($product);
-                    //print_r($newProduct);
+                    
                     $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
                     $result = $conn->query($sql);
                     if(!$result){
@@ -156,10 +164,14 @@
                     exit;
                 }
                 else if($_POST["ProductType"] == "Furniture" && !empty($height) && !empty($width) && !empty($length)){
+                    if(!is_numeric($height) || !is_numeric($width) || !is_numeric($length) || !is_numeric($price)){
+                        $errorMsg = "Please, provide the data of indicated type";
+                        break;
+                    }
                     $product = new Furniture;
                     $product->setFurniture($sku, $name, $price, $height, $width, $length);
                     $newProduct = serialize($product);
-                    //print_r($newProduct);
+
                     $sql = "INSERT INTO products (SKU, Product) VALUES('$sku','$newProduct')";
                     $result = $conn->query($sql);
                     if(!$result){
@@ -170,7 +182,7 @@
                     exit;
                 }
                 else{
-                    $errorMsg = "Please, submit required data!";
+                    $errorMsg = "Please, submit required data";
                     break;
                 }
             }
