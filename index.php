@@ -30,8 +30,9 @@
                 <div class="col-6">
                     <ul>
                         <li> <a role="button" class="btn btn-success" href="add_product.php">ADD</a></li>
-                        <li> <button type="submit" class="btn btn-danger" id="delete-product-btn" form="delete-prod">MASS DELETE</button></li>
-                        <!-- “MASS DELETE” action, implemented as checkboxes next to each product 
+                        <li> <button type="submit" class="btn btn-danger" name="delete-product-btn" id="delete-product-btn" >MASS DELETE</button></li>
+                       <!-- <li> <input type="submit" name="delete-product-btn" id="delete-product-btn" form="delete_prod" value="MASS DELETE"></li>
+                         “MASS DELETE” action, implemented as checkboxes next to each product 
                             (should have a class: .delete-checkbox) 
                             and a button “MASS DELETE” triggering delete action for the selected products.
                         -->
@@ -48,18 +49,16 @@
                         $product = unserialize( $row['Product']);
                         if($product instanceof DVD){
                             echo"
-                            <div class='col-12 col-lg-3'>
-                                <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
+                            <div class='col-12 col-lg-3'> 
+                                <div class='card' id='$product->sku' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
                                     <div class='card-body'>
-                                        <form method='post' id='delete_prod'>
-                                        <input type='checkbox' class='delete-checkbox' name='chk_id[]' value='$product->sku'>
-                                        </form>
-                                        <div class='text-center'>
-                                            <h5 class='card-title'>$product->sku</h5>
-                                            <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
-                                            <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
-                                            <h6 class='card-subtitle mb-2 text-muted'>Size: $product->size MB</h6>
-                                        </div>
+                                            <input type='checkbox' class='delete-checkbox' name='product_sku[]' value='$product->sku'>
+                                            <div class='text-center'>
+                                                <h5 class='card-title'>$product->sku</h5>
+                                                <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
+                                                <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
+                                                <h6 class='card-subtitle mb-2 text-muted'>Size: $product->size MB</h6>
+                                            </div>
                                     </div>
                                 </div>
                             </div>";
@@ -67,17 +66,17 @@
                         if($product instanceof Book){
                             echo"
                             <div class='col-12 col-lg-3'>
-                                <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
+                                <div class='card' id='$product->sku' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
                                     <div class='card-body'>
-                                        <form method='post' id='delete_prod'>
-                                        <input type='checkbox' class='delete-checkbox' name='chk_id[]'value='$product->sku'>
-                                        </form>
-                                        <div class='text-center'>
-                                            <h5 class='card-title'>$product->sku</h5>
-                                            <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
-                                            <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
-                                            <h6 class='card-subtitle mb-2 text-muted'>Weight: $product->weight KG</h6>
-                                        </div>
+                                        
+                                        <input type='checkbox' class='delete-checkbox' name='product_sku[]' value='$product->sku'>
+                                            <div class='text-center'>
+                                                <h5 class='card-title'>$product->sku</h5>
+                                                <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
+                                                <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
+                                                <h6 class='card-subtitle mb-2 text-muted'>Weight: $product->weight KG</h6>
+                                            </div>
+                                       
                                     </div>
                                 </div>
                             </div>";
@@ -85,26 +84,59 @@
                         if($product instanceof Furniture){
                             echo"
                             <div class='col-12 col-lg-3'>
-                                <div class='card' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
+                                <div class='card' id='$product->sku' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
                                     <div class='card-body'>
-                                        <form method='post' id='delete_prod'>
-                                        <input type='checkbox' class='delete-checkbox' name='chk_id[]'value='$product->sku'>
-                                        </form>
-                                        <div class='text-center'>
-                                            <h5 class='card-title'>$product->sku</h5>
-                                            <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
-                                            <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
-                                            <h6 class='card-subtitle mb-2 text-muted'>Dimension: $product->height X $product->width X $product->length</h6>
-                                        </div>
+                                        <input type='checkbox' class='delete-checkbox' name='product_sku[]' value='$product->sku'>
+                                            <div class='text-center'>
+                                                <h5 class='card-title'>$product->sku</h5>
+                                                <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
+                                                <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
+                                                <h6 class='card-subtitle mb-2 text-muted'>Dimension: $product->height X $product->width X $product->length</h6>
+                                            </div>
                                     </div>
                                 </div>
                             </div>";
                         }
                     }
-             
                 ?>
             </div>
         </div>
+        <script type="text/javascript">
+            //deleting multiple products 
+           $(document).ready(function(){
+            $('#delete-product-btn').click(function(){
+                var sku = [];
+                $(':checkbox:checked').each(function(i){
+                    sku[i]=$(this).val();
+                });
+                if(sku.length > 0){
+                    $.ajax({
+                    url:'delete_product.php',
+                    method: 'POST',
+                    data: {sku:sku},
+                    success: function(){
+                        for(var i=0; i<sku.length; i++){
+                            $('div#'+sku[i]+'').remove();
+                        }
+                    }
+                    });
+                }
+            });
+           });
+
+            /*function getCheckboxesValues(){
+                return [].slice.apply(document.querySelectorAll(".delete-checkbox"))
+                .filter(function(c){ return c.checked; })
+                .map(function(c){ return c.value; });
+            }
+
+            document.getElementById("delete-product-btn").addEventListener("click", function(){
+                let sku_arr = getCheckboxesValues();
+                $.post("delete_product.php", sku_arr);
+                console.log(sku_arr);
+            });*/
+        
+        </script>
         <footer>
             <div class="container-lg my-5">
                 <div class="row">
