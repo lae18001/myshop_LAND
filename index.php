@@ -117,6 +117,7 @@
                     success: function(){
                         for(var i=0; i<sku.length; i++){
                             $('div#'+sku[i]+'').remove();
+                            location.reload();
                         }
                     }
                     });
