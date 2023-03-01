@@ -31,11 +31,6 @@
                     <ul>
                         <li> <a role="button" class="btn btn-success" href="add_product.php">ADD</a></li>
                         <li> <button type="submit" class="btn btn-danger" name="delete-product-btn" id="delete-product-btn" >MASS DELETE</button></li>
-                       <!-- <li> <input type="submit" name="delete-product-btn" id="delete-product-btn" form="delete_prod" value="MASS DELETE"></li>
-                         “MASS DELETE” action, implemented as checkboxes next to each product 
-                            (should have a class: .delete-checkbox) 
-                            and a button “MASS DELETE” triggering delete action for the selected products.
-                        -->
                     </ul>
                 </div>
                 <hr>
@@ -117,26 +112,13 @@
                     success: function(){
                         for(var i=0; i<sku.length; i++){
                             $('div#'+sku[i]+'').remove();
-                            location.reload();
                         }
+                        location.reload();
                     }
                     });
                 }
             });
            });
-
-            /*function getCheckboxesValues(){
-                return [].slice.apply(document.querySelectorAll(".delete-checkbox"))
-                .filter(function(c){ return c.checked; })
-                .map(function(c){ return c.value; });
-            }
-
-            document.getElementById("delete-product-btn").addEventListener("click", function(){
-                let sku_arr = getCheckboxesValues();
-                $.post("delete_product.php", sku_arr);
-                console.log(sku_arr);
-            });*/
-        
         </script>
         <footer>
             <div class="container-lg my-5">

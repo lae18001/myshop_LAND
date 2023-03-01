@@ -17,7 +17,7 @@
         echo "Connection Failed!";
     }
     
-    class Product{
+    abstract class Product{
         public $sku;
         public $name;
         public $price;
@@ -123,7 +123,7 @@
 
             //checks for entered user inputs,and according to product type, creates a new object instance to add to database
             if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
-                if($_POST["ProductType"] == "DVD" && !empty($size)){
+                if(!empty($size)){
                     if(!is_numeric($size) || !is_numeric($price)){
                         $errorMsg = "Please, provide the data of indicated type";
                         break;
@@ -142,7 +142,7 @@
                     exit;
                    
                 }
-                else if($_POST["ProductType"] == "Book" && !empty($weight)){
+                else if(!empty($weight)){
                     if(!is_numeric($weight) || !is_numeric($price)){
                         $errorMsg = "Please, provide the data of indicated type";
                         break;
@@ -160,7 +160,7 @@
                     header("location: index.php");
                     exit;
                 }
-                else if($_POST["ProductType"] == "Furniture" && !empty($height) && !empty($width) && !empty($length)){
+                else if(!empty($height) && !empty($width) && !empty($length)){
                     if(!is_numeric($height) || !is_numeric($width) || !is_numeric($length) || !is_numeric($price)){
                         $errorMsg = "Please, provide the data of indicated type";
                         break;
