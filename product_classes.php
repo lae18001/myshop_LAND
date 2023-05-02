@@ -1,4 +1,22 @@
 <?php
+
+    //OOP database connection usin PDO
+    /*class DBconnection {
+        private $servername = "localhost";
+        private $username = "root";
+        private $password = "";
+        private $datab = "dev_test";
+
+        protected function connect(){
+            $dsn = 'mysql=' . $this->servername . ';dbname=' . $this->datab;
+            $pdo = new PDO($dsn, $this->username, $this->password);
+            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            return $pdo;
+        }
+    }*/
+
+
+    //Procedural PHP connection to DB
     $servername = "localhost";
     $username = "root";
     $password = "";
