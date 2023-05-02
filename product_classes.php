@@ -1,13 +1,13 @@
 <?php
-    /*$servername = "localhost";
+    $servername = "localhost";
     $username = "root";
     $password = "";
-    $datab = "dev_test";*/
+    $datab = "dev_test";
 
-    $servername = "localhost";
+    /*$servername = "localhost";
     $username = "id20340347_root";
     $password = "TestDevPro_2023";
-    $datab = "id20340347_dev_test";
+    $datab = "id20340347_dev_test";*/
     
     // Create connection to DB
     $conn = new mysqli($servername, $username, $password, $datab);
@@ -36,6 +36,7 @@
         public function getPrice(){
             echo $this->price;
         }
+        abstract public function getProductInfo();
     }
 
     class DVD extends Product{ 
@@ -46,7 +47,7 @@
                 $this->size = $size;
         }
 
-        public function getSize(){
+        public function getProductInfo(){
             echo $this->size;
         }
     }
@@ -58,7 +59,7 @@
                 parent::setProduct($sku, $name, $price);
                 $this->weight = $weight; 
         }
-        public function getWeight(){
+        public function getProductInfo(){
             echo $this->weight;
         } 
     }
@@ -75,16 +76,7 @@
                 $this->length = $length; 
         }
 
-        public function getHeight(){
-            echo $this->height;
-        }
-        public function getWidth(){
-            echo $this->width;
-        }
-        public function getLength(){
-            echo $this->length;
-        }
-        public function getDimensions(){
+        public function getProductInfo(){
             echo $this->height. "X" . $this->width. "X". $this->length;
         }
     
