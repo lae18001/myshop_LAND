@@ -48,7 +48,7 @@
         }
 
         public function getProductInfo(){
-            echo $this->size;
+            echo "Size: ". $this->size . "MB";
         }
     }
 
@@ -60,7 +60,7 @@
                 $this->weight = $weight; 
         }
         public function getProductInfo(){
-            echo $this->weight;
+            echo "Weight: " . $this->weight . "KG";
         } 
     }
 
@@ -77,12 +77,16 @@
         }
 
         public function getProductInfo(){
-            echo $this->height. "X" . $this->width. "X". $this->length;
+            echo "Dimension:" . $this->height. "X" . $this->width. "X". $this->length;
         }
     
     }
 
-    $sku = "";
+    /*$product1 = new DVD;
+    $product2 = new Book;
+    $product3 = new Furniture;*/
+
+     $sku = "";
     $name = "";
     $price = "";
     $p_type = "";

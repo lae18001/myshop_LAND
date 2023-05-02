@@ -39,10 +39,11 @@
         <div class="container-lg my-5">
             <div class="row">
                 <?php 
-                    //reads data from DB by row, and displays it with associated key names
+                    //------------reads data from DB row by row, and displays it with associated key/property names--------------
+                    //while($row =  mysqli_fetch_all($result)){
                     while($row = mysqli_fetch_assoc($result)){
                         $product = unserialize( $row['Product']);
-                        if($product instanceof DVD){
+                        //if($product instanceof DVD){
                             echo"
                             <div class='col-12 col-lg-3'> 
                                 <div class='card' id='$product->sku' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
@@ -52,13 +53,13 @@
                                                 <h5 class='card-title'>$product->sku</h5>
                                                 <h6 class='card-subtitle mb-2 text-muted'>$product->name</h6>
                                                 <h6 class='card-subtitle mb-2 text-muted'>$product->price $</h6>
-                                                <h6 class='card-subtitle mb-2 text-muted'>Size: $product->size MB</h6>
+                                                <h6 class='card-subtitle mb-2 text-muted'>$product->getProductInfo()</h6>
                                             </div>
                                     </div>
                                 </div>
                             </div>";
                         }
-                        if($product instanceof Book){
+                       /* if($product instanceof Book){
                             echo"
                             <div class='col-12 col-lg-3'>
                                 <div class='card' id='$product->sku' style='width: 16rem; height:12rem; margin-bottom: 25px; margin-left: 25px;'>
@@ -92,12 +93,12 @@
                                 </div>
                             </div>";
                         }
-                    }
+                    }*/
                 ?>
             </div>
         </div>
         <script type="text/javascript">
-            //deleting multiple products 
+            //------------deleting multiple products using checkbox----------------
            $(document).ready(function(){
             $('#delete-product-btn').click(function(){
                 var sku = [];
