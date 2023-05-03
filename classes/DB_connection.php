@@ -4,7 +4,7 @@
     class DB_connection { 
         private $servername = "localhost";
         private $username = "root";
-        private $password = "";
+        private $password = " ";
         private $datab = "dev_test";
 
         protected function connect(){
@@ -34,4 +34,4 @@
         echo "Connection Failed!";
     }*/
 
-    ?>
+    

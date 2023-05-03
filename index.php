@@ -40,7 +40,7 @@
             <div class="row">
                 <?php 
 
-                    $testObj = new DataBase;
+                    $testObj = new DB_queries;
                     $testObj->getProducts();
                     //------------reads data from DB row by row, and displays it with associated key/property names--------------
                     //while($row =  mysqli_fetch_all($result)){

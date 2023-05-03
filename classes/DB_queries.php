@@ -1,5 +1,5 @@
 <?php
-     class DataBase extends DB_connection{
+     class DB_queries extends DB_connection{
         public function getProducts(){
             $sql = "SELECT * FROM products";
             $stmt = $this->connect()->query($sql);
