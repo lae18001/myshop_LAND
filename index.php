@@ -1,13 +1,14 @@
 <?php
     include "product_classes.php";
+    include "db_classes.php";
 
     //sql request from DB
-    $sql = "SELECT * FROM products";
+    /*$sql = "SELECT * FROM products";
     $result = $conn->query($sql);
 
     if(!$result){
         die("Invalid Query: " .$conn->connect_error);
-    }
+    }*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +40,12 @@
         <div class="container-lg my-5">
             <div class="row">
                 <?php 
+
+                    $testObj = new DBconnection();
+                    //$testObj->getProducts();
                     //------------reads data from DB row by row, and displays it with associated key/property names--------------
                     //while($row =  mysqli_fetch_all($result)){
-                    while($row = mysqli_fetch_assoc($result)){
+                   /* while($row = mysqli_fetch_assoc($result)){
                         $product = unserialize( $row['Product']);
                         //if($product instanceof DVD){
                             echo"
@@ -58,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>";
-                        }
+                        }*/
                        /* if($product instanceof Book){
                             echo"
                             <div class='col-12 col-lg-3'>

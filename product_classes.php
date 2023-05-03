@@ -1,39 +1,6 @@
 <?php
 
-    //OOP database connection usin PDO
-    /*class DBconnection {
-        private $servername = "localhost";
-        private $username = "root";
-        private $password = "";
-        private $datab = "dev_test";
-
-        protected function connect(){
-            $dsn = 'mysql=' . $this->servername . ';dbname=' . $this->datab;
-            $pdo = new PDO($dsn, $this->username, $this->password);
-            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            return $pdo;
-        }
-    }*/
-
-
-    //Procedural PHP connection to DB
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $datab = "dev_test";
-
-    /*$servername = "localhost";
-    $username = "id20340347_root";
-    $password = "TestDevPro_2023";
-    $datab = "id20340347_dev_test";*/
-    
-    // Create connection to DB
-    $conn = new mysqli($servername, $username, $password, $datab);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-        echo "Connection Failed!";
-    }
+    include "db_classes.php";
     
     abstract class Product{
         public $sku;
@@ -129,13 +96,13 @@
         $length = $_POST["Length"];
 
         do{
-            //checks if any given input field is empty, if it is, display the error message.
+            //-------checks if any given input field is empty, if it is, display the error message.-----------
             if(empty($sku) || empty($name) || empty($price) || empty($p_type)){
                 $errorMsg = "Please, submit required data!";
                 break;
             }
 
-            //checks for entered user inputs,and according to product type, creates a new object instance to add to database
+            //-----------checks for entered user inputs,and according to product type, creates a new object instance to add to database------boilerplate!!!
             if(isset($_POST["SKU"]) && isset($_POST["Name"]) && isset($_POST["Price"]) && isset($_POST["ProductType"])){
                 if(!empty($size)){
                     if(!is_numeric($size) || !is_numeric($price)){
