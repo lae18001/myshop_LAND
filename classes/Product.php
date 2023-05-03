@@ -1,8 +1,5 @@
-<?php
-
-    include "db_classes.php";
-    
-    abstract class Product{
+ <?php
+ abstract class Product{
         public $sku;
         public $name;
         public $price;
@@ -24,50 +21,7 @@
         abstract public function getProductInfo();
     }
 
-    class DVD extends Product{ 
-        public $size;
-
-        public function setDVD($sku, $name, $price, $size){
-                parent::setProduct($sku, $name, $price);
-                $this->size = $size;
-        }
-
-        public function getProductInfo(){
-            echo "Size: ". $this->size . "MB";
-        }
-    }
-
-    class Book extends Product{ 
-        public $weight;
-
-        public function setBook($sku, $name, $price, $weight){
-                parent::setProduct($sku, $name, $price);
-                $this->weight = $weight; 
-        }
-        public function getProductInfo(){
-            echo "Weight: " . $this->weight . "KG";
-        } 
-    }
-
-    class Furniture extends Product{ 
-        public $width;
-        public $height;
-        public $length;
-
-        public function setFurniture($sku, $name, $price, $height, $width, $length){
-                parent::setProduct($sku, $name, $price);
-                $this->height = $height; 
-                $this->width = $width; 
-                $this->length = $length; 
-        }
-
-        public function getProductInfo(){
-            echo "Dimension:" . $this->height. "X" . $this->width. "X". $this->length;
-        }
-    
-    }
-
-    /*$product1 = new DVD;
+      /*$product1 = new DVD;
     $product2 = new Book;
     $product3 = new Furniture;*/
 
@@ -177,4 +131,3 @@
 
         }while(false);  
     }
-?>

@@ -1,6 +1,6 @@
 <?php
-    include "product_classes.php";
-    include "db_classes.php";
+   // include "product_classes.php";
+    //include "db_classes.php";
 
     if(isset($_POST["sku"])){
         foreach($_POST["sku"] as $sku){

@@ -1,6 +1,5 @@
 <?php
-    include "product_classes.php";
-    include "db_classes.php";
+    include "autoloader.php";
 
     //sql request from DB
     /*$sql = "SELECT * FROM products";
@@ -41,8 +40,8 @@
             <div class="row">
                 <?php 
 
-                    $testObj = new DBconnection();
-                    //$testObj->getProducts();
+                    $testObj = new DataBase;
+                    $testObj->getProducts();
                     //------------reads data from DB row by row, and displays it with associated key/property names--------------
                     //while($row =  mysqli_fetch_all($result)){
                    /* while($row = mysqli_fetch_assoc($result)){
